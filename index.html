@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="JavaScriptの基本説明とCanvas APIを使用したアニメーションの作成方法、自然の種の落下メカニズムを再現する方法について学ぶページです。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="html,css,js,web">
+    <meta name="format-detection" content="telephone=no,email=no,address=no">
+    <title>Portfolio</title>
+    <link rel="icon" href="./image/kame .png">
+    <link rel="apple-touch-icon" href="./image/icon-ume_suibokuga.png">
+    <link rel="stylesheet" href="main.css">
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Three.js importmap -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.167.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script>
+        (function(d) {
+            var config = {
+            kitId: 'arw6slj',
+            scriptTimeout: 3000,
+            async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+        })(document);
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <nav>
+            <a href="https://earthchart0809.github.io/Portfolio/#about" target="_blank">ABOUT</a>
+            <a href="https://earthchart0809.github.io/Portfolio/#career" target="_blank">CAREER</a>
+            <a href="https://earthchart0809.github.io/Portfolio/#skills" target="_blank">SKILLS</a>
+            <!--<a href="#awards">AWARDS</a>
+            <a href="#publications">PUBLICATIONS</a>-->
+            <a href="https://earthchart0809.github.io/Portfolio/#works" target="_blank">WORKS</a>
+            <a href="https://earthchart0809.github.io/Portfolio/#contact" target="_blank">CONTACT</a>
+        </nav>
+    </header>
+
+
+    <h1 class="upheader"><strong>EarthChart's JavaScript Report</strong></h1>
+    <div class="contents-flex">
+    <div class="contents">
+        <h1>目次</h1>
+        <ul>
+            <li>初めに</li>
+            <li>JavaScriptの基本説明</li>
+            <li>Canvas API について</li>
+            <li>アニメーション</li>
+            <li>自然の種の落下メカニズムをJavaScriptで再現しよう</li>
+        </ul>
+    </div>
+
+    <div class="Introduction-flex">
+    <div class="Introduction">
+        <h2>初めに</h2>
+        <p>このページでは、JavaScriptの基本的な説明と、Canvas APIを使用したアニメーションの作成方法について説明します。また、自然の種の落下メカニズムをJavaScriptで再現する方法についても触れます。</p>
+
+        <h2>JavaScriptの基本説明</h2>
+        <p>JavaScriptは、Webブラウザ上で動作するプログラミング言語であり、主にユーザーインターフェースの操作やデータの処理に使用されます。JavaScriptの基本的な文法や構文について学ぶことは、Web開発において非常に重要です。</p>
+
+        <h2>Canvas API について</h2>
+        <p>Canvas APIは、HTML5で導入された2Dグラフィックスを描画するためのAPIです。JavaScriptを使用して、動的なグラフィックスやアニメーションを作成することができます。</p>
+
+        <h2>アニメーション</h2>
+        <p>JavaScriptを使用したアニメーションの作成方法について学びます。Canvas APIを使用して、オブジェクトの移動や変形を実現することができます。</p>
+
+        <h2>自然の種の落下メカニズムをJavaScriptで再現しよう</h2>
+        <p>自然界における種の落下メカニズムをJavaScriptで再現する方法について考えます。重力や空気抵抗を考慮したシミュレーションを行うことで、よりリアルなアニメーションを作成することができます。</p>
+    </div>
+
+
+    <h1>種の落下シミュレーション</h1>
+    
+    <!-- Canvas API デモ -->
+    <div class="contents-flex">
+    <div class="simulation">
+        <h3>Canvas API を使用した2Dアニメーション</h3>
+        <canvas id="canvas" width="500" height="600"></canvas>
+    </div>
+    </div>
+
+    <!-- Three.js デモ -->
+    <div class="contents-flex">
+    <div class="threejs-container">
+        <h3>Three.js を使用した3Dアニメーション</h3>
+        <!-- test.htmlと同じ方式でcanvas要素を事前に配置 -->
+        <canvas id="threejs-canvas" width="800" height="600"></canvas>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+
+
+    <!-- Canvas API スクリプト -->
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // カエデの種オブジェクト
+        const mapleSeed = {
+            x: 250, // 初期位置（中央）
+            y: 0,
+            angle: 0, // 回転角
+            rotationSpeed: 0.1,
+            fallSpeed: 1.5,
+            size: 40
+        };
+
+        function drawMapleSeed(seed) {
+            ctx.save();
+            ctx.translate(seed.x, seed.y);
+            ctx.rotate(seed.angle);
+
+            // 羽を再現（シンプルな長方形）
+            ctx.fillStyle = "#a0522d";
+            ctx.fillRect(-seed.size / 2, -seed.size / 4, seed.size, seed.size / 2);
+
+            // 種本体
+            ctx.beginPath();
+            ctx.arc(0, 0, 5, 0, Math.PI * 2);
+            ctx.fillStyle = "#8b4513";
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 落下・回転
+            mapleSeed.y += mapleSeed.fallSpeed;
+            mapleSeed.angle += mapleSeed.rotationSpeed;
+
+            drawMapleSeed(mapleSeed);
+
+            // 画面外に出たらリセット（ループ表示）
+            if (mapleSeed.y > canvas.height + 20) {
+                mapleSeed.y = -20;
+                mapleSeed.angle = 0;
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        update();
+    </script>
+
+    <!-- Three.js スクリプト -->
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    // 全体を関数でラップ
+    function initThreeJS() {
+        const canvas = document.getElementById('threejs-canvas');
+        
+        if (!canvas) {
+            console.error('threejs-canvas が見つかりません');
+            return;
+        }
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: true
+        });
+        renderer.setSize(800, 600);
+        renderer.setClearColor(0xf0f0f0);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, 800/600, 0.1, 1000);
+        camera.position.set(8, 8, 8);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+
+        // 光源
+        const light = new THREE.DirectionalLight(0xffffff, 1.0);
+        light.position.set(3, 5, 5);
+        scene.add(light);
+        scene.add(new THREE.AmbientLight(0x888888));
+
+        // カエデの種オブジェクト作成
+        const seedGroup = new THREE.Group(); // 種全体のグループ（真下に落下）
+        scene.add(seedGroup);
+
+        const rotateGroup = new THREE.Group(); // 羽の自転用グループ
+        seedGroup.add(rotateGroup);
+
+        // 羽（より現実的な形状）- 細長く、少し曲線的に
+        const wingGeo = new THREE.BoxGeometry(2.5, 0.03, 0.3);
+        const wingMat = new THREE.MeshStandardMaterial({ 
+            color: 0xa0522d,
+            transparent: true,
+            opacity: 0.9
+        });
+        const wing = new THREE.Mesh(wingGeo, wingMat);
+        wing.position.set(1.0, 0, 0); // 種から少し離れた位置
+        rotateGroup.add(wing);
+
+        // 種本体（重心となる部分）
+        const seedBodyGeo = new THREE.SphereGeometry(0.15, 12, 12);
+        const seedBodyMat = new THREE.MeshStandardMaterial({ color: 0x654321 });
+        const seedBody = new THREE.Mesh(seedBodyGeo, seedBodyMat);
+        seedBody.position.set(0, 0, 0); // 中心位置
+        seedGroup.add(seedBody);
+
+        // 羽の接続部（茎のような部分）
+        const stemGeo = new THREE.CylinderGeometry(0.02, 0.02, 1.2, 8);
+        const stemMat = new THREE.MeshStandardMaterial({ color: 0x8b6914 });
+        const stem = new THREE.Mesh(stemGeo, stemMat);
+        stem.rotation.z = Math.PI / 2; // 横向きに
+        stem.position.set(0.6, 0, 0);
+        rotateGroup.add(stem);
+
+        // アニメーション用変数
+        let t = 0;
+        const startY = 10;           // 開始高度
+        const fallSpeed = 0.06;      // ゆっくりとした落下速度
+        const autorotationSpeed = 0.3; // 羽の自転速度（カエデの種特有の回転）
+        const wobbleAmplitude = 0.5; // 左右の揺れの幅
+        const wobbleFrequency = 2.5; // 揺れの周波数
+
+        // アニメーション関数
+        function animate() {
+            requestAnimationFrame(animate);
+
+            t += 0.016; // 約60FPSでの時間刻み
+
+            // 種は基本的に真下に落下
+            seedGroup.position.y = startY - t * fallSpeed;
+
+            // カエデの種特有の自転（羽が風車のように回転）
+            rotateGroup.rotation.y += autorotationSpeed;
+
+            // 落下中の微細な左右の揺れ（空気抵抗による）
+            const wobbleX = Math.sin(t * wobbleFrequency) * wobbleAmplitude * Math.exp(-t * 0.1);
+            const wobbleZ = Math.cos(t * wobbleFrequency * 0.7) * wobbleAmplitude * 0.5 * Math.exp(-t * 0.1);
+            
+            seedGroup.position.x = wobbleX;
+            seedGroup.position.z = wobbleZ;
+
+            // 羽の傾きによる微細な振動
+            const tilt = Math.sin(t * 4) * 0.05;
+            rotateGroup.rotation.x = tilt;
+
+            // 画面外に落ちたらリセット
+            if (seedGroup.position.y < -6) {
+                t = 0;
+                seedGroup.position.set(0, startY, 0);
+                rotateGroup.rotation.y = 0;
+                rotateGroup.rotation.x = 0;
+            }
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // 落下軌跡の可視化（螺旋効果を視覚的に確認）
+        function createTrajectoryVisualization() {
+            const points = [];
+            const trajectoryMaterial = new THREE.LineBasicMaterial({ 
+                color: 0x00ff00, 
+                transparent: true, 
+                opacity: 0.2 
+            });
+
+            // より現実的な軌跡の計算
+            for (let i = 0; i < 300; i++) {
+                const time = i * 0.02;
+                
+                const y = startY - time * fallSpeed;
+                const wobbleX = Math.sin(time * wobbleFrequency) * wobbleAmplitude * Math.exp(-time * 0.1);
+                const wobbleZ = Math.cos(time * wobbleFrequency * 0.7) * wobbleAmplitude * 0.5 * Math.exp(-time * 0.1);
+                
+                if (y > -6) {
+                    points.push(new THREE.Vector3(wobbleX, y, wobbleZ));
+                }
+            }
+
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const line = new THREE.Line(geometry, trajectoryMaterial);
+            scene.add(line);
+        }
+
+        // 軌跡を表示（デバッグ用）
+        createTrajectoryVisualization();
+    }
+
+    // 関数を実行
+    initThreeJS();
+</script>
+
+<h1>本コンテンツの作成時間</h1>
+<p>約2時間</p>
+
+<h1>参考資料</h1>
+<ul>
+    <li>https://developer.mozilla.org/ja/docs/Web/API/Canvas_API/Tutorial</li>
+    <li>https://qiita.com/watabo_shi/items/bf9bcd4569b6d480c608</li>
+    <li>https://logmi.jp/main/technology/330425</li>
+
+
+</body>
+</html>
