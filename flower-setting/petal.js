@@ -6,10 +6,10 @@ import * as THREE from 'three';
         };
 
         function init() {
-            const canvas = document.getElementById("sakuraCanvas");
-            
+            const canvas = document.getElementById("petalCanvas");
+
             if (!canvas) {
-                console.error('sakuraCanvas が見つかりません');
+                console.error('petalCanvas が見つかりません');
                 return;
             }
 
