@@ -1,11 +1,15 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-window.onload = () => {
-    init();
-};
+// ★修正：DOMContentLoadedイベントを使用
+document.addEventListener('DOMContentLoaded', () => {
+    // 少し遅延させて初期化
+    setTimeout(() => {
+        initSakura();
+    }, 100); // 100ms遅延
+});
 
-function init() {
+function initSakura() {
     const canvas = document.getElementById("sakuraCanvas");
     
     if (!canvas) {
@@ -13,19 +17,23 @@ function init() {
         return;
     }
 
+    // WebGLコンテキストの設定を追加
+    const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true, // ★追加
+        powerPreference: "high-performance" // ★追加
+    });
+
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x87ceeb); // 春の空のような青
+    scene.background = new THREE.Color(0xf3f9f1); // 春の空のような青
     
     const camera = new THREE.PerspectiveCamera(
         60, canvas.width / canvas.height, 0.1, 1000
     );
     camera.position.set(0, 1, 3);
 
-    const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        antialias: true,
-        alpha: true
-    });
     renderer.setSize(canvas.width, canvas.height);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.shadowMap.enabled = true;
@@ -179,7 +187,7 @@ function init() {
     const sakuraFlower = new THREE.Group();
     
     // 5枚の花びらを配置
-    const petalColors = [0xff69b4, 0xff91a4, 0xffb6c1, 0xff69b4, 0xff91a4];
+    const petalColors = [0xff69b4, 0xff69b4, 0xff69b4, 0xff69b4, 0xff69b4];
 
     for (let i = 0; i < 5; i++) {
         const angle = (i / 5) * Math.PI * 2;
@@ -188,7 +196,7 @@ function init() {
     }
     
     // 雄蕊を追加
-    const stamens = createStamen(10);
+    const stamens = createStamen(15);
     sakuraFlower.add(stamens);
     
     // 雌蕊を追加

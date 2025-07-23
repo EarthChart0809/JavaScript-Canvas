@@ -51,7 +51,7 @@
                 const petal = new THREE.Mesh(geometry, material);
                 
                 // 花弁を薄く、湾曲させる
-                petal.scale.set(1, 0.15, 0.8);
+                petal.scale.set(1, 0.3, 0.8);
                 
                 // 螺旋状の位置計算
                 petal.position.x = Math.cos(spiralAngle) * radius;
@@ -70,7 +70,7 @@
 
             // 黄金角（フィボナッチ螺旋）
             const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-            const totalPetals = 30;
+            const totalPetals = 20;
             
             // 螺旋状に花弁を配置
             for (let i = 0; i < totalPetals; i++) {
