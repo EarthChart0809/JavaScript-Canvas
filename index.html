@@ -63,7 +63,7 @@
             <li>JavaScriptの基本説明</li>
             <li>Canvas API について</li>
             <li>アニメーション</li>
-            <li>自然の種の落下メカニズムをJavaScriptで再現しよう</li>
+            <li>3Dの花を作成する</li>
         </ul>
     </div>
 
@@ -71,7 +71,7 @@
     <div class="Introduction">
         <h2>初めに</h2>
         <p>このページでは、JavaScriptの基本的な説明と、Canvas APIを使用したアニメーションの作成方法について説明します。<br>
-            また、自然の種の落下メカニズムをJavaScriptで再現する方法についても触れます。</p>
+            また、3Dモデルの花を作成する方法についても触れます。</p>
 
         <h2>JavaScriptの基本説明</h2>
         <p>JavaScriptは、Webブラウザ上で動作するプログラミング言語であり、主にユーザーインターフェースの操作やデータの<br>
@@ -93,8 +93,12 @@
         }
     }
 &lt;/script&gt;
+&lt;script type="module"&gt;
+ import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+&lt;/script&gt;
             </code>
-            <button onclick="copyToClipboard('code13')">コピー</button>
+            <button onclick="copyToClipboard('code1')">コピー</button>
         </p>
     </details>
 
@@ -102,35 +106,189 @@
         <p>Canvas APIは、HTML5で導入された2Dグラフィックスを描画するためのAPIです。JavaScriptを使用して、<br>
             動的なグラフィックスやアニメーションを作成することができます。</p>
 
+        <details>
+        <summary>canvasの利用方法</summary>
+        <p>
+            <code id="code2">
+&lt;canvas&gt; id="petalCanvas" width="600" height="480"&gt;&lt;/canvas&gt;
+            </code>
+            <button onclick="copyToClipboard('code2')">コピー</button>
+        </p>
+    </details>
+
         <h2>アニメーション</h2>
-        <p>JavaScriptを使用したアニメーションの作成方法について学びます。Canvas APIを使用して、オブジェクトの<br>
-            移動や変形を実現することができます。</p>
+        <p>JavaScriptを使用したアニメーションの作成方法について学びます。Three.jsでは`requestAnimationFrame()`を使用して、<br>
+            スムーズな回転や移動アニメーションを実現することができます。</p>
+<details>
+        <summary>アニメーションループの基本</summary>
+        <p>
+            <code id="code1">
+// アニメーションループ
+function animate() {
+    requestAnimationFrame(animate);  // 次のフレームを要求
+    
+    // オブジェクトを回転
+    petal.rotation.z += 0.01;       // Z軸回転
+    
+    // カメラコントロールを更新
+    controls.update();
+    
+    // シーンを描画
+    renderer.render(scene, camera);
+}
+
+// アニメーション開始
+animate();
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+        
+
 
         <h2>3Dの花を作成する</h2>
         <p>3Dの花を作成するために、Three.jsを使用して立体的な花のモデルを作成します。花びらや茎、葉っぱを個別に作成し、<br>
             組み合わせて1つの花を形成します。</p>
+    </div>
     </div>
 
     <h1>🌹 Three.js 3D花園 🌸</h1>
     
     <div class="canvas-container">
         <!-- 桜の花びらのセクション -->
+        <div class="demo-flex">
         <div class="demo-section">
             <div class="info">
                 🌸 桜の花びら<br>
                 マウスでドラッグして回転できます
             </div>
-            <canvas id="petalCanvas" width="800" height="600"></canvas>
+            <canvas id="petalCanvas" width="600" height="480"></canvas>
+        </div>
+
+        <div class="demo-explain">
+            <p>このセクションでは、桜の花びらを描画するためのJavaScriptコードを示します。<br>
+            花びらはCanvas APIを使用して描画され、マウスでドラッグして回転させることができます。<br>
+        「quadraticCurveTo()を使って桜の花びら特有の曲線を描画」しました。</p>
+<details>
+        <summary>花びら生成関数</summary>
+        <p>
+            <code id="code1">
+// 花びら生成関数
+function createSakuraPetal(size, color, position) {
+    const shape = new THREE.Shape();
+    
+    // 桜の花びらの形状を描画
+    shape.moveTo(0, 0);  // 開始点
+    shape.quadraticCurveTo(size * 0.5, size * 0.2, size, size * 0.6);      // 右の曲線
+    shape.quadraticCurveTo(size * 0.9, size * 1.0, size * 0.5, size * 1.2); // 先端の右側
+    shape.quadraticCurveTo(size * 0.2, size * 1.3, 0, size * 1.0);          // 先端のくぼみ
+    shape.quadraticCurveTo(-size * 0.2, size * 0.7, -size * 0.1, size * 0.3); // 左の曲線
+    shape.quadraticCurveTo(-size * 0.05, size * 0.1, 0, 0);                 // 元の位置に戻る
+}
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+        <summary>2D形状を3Dに変換</summary>
+        <p>
+            <code id="code1">
+// 2D形状を3Dに変換
+const extrudeSettings = {
+    depth: 0.01,           // 厚み
+    bevelEnabled: true,    // 面取りを有効
+    bevelThickness: 0.005, // 面取りの厚み
+    bevelSize: 0.005,      // 面取りのサイズ
+    bevelSegments: 2       // 面取りの分割数
+};
+
+const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+        <summary>花びらに自然な湾曲を追加</summary>
+        <p>
+            <code id="code1">
+// 花びらに自然な湾曲を追加
+const positionAttribute = geometry.attributes.position;
+const vertex = new THREE.Vector3();
+
+for (let i = 0; i < positionAttribute.count; i++) {
+    vertex.fromBufferAttribute(positionAttribute, i);
+    
+    // 中心からの距離に応じて湾曲（Z方向に曲げる）
+    const dist = Math.sqrt(vertex.x ** 2 + vertex.y ** 2);
+    const curveStrength = 0.1; // 湾曲の強さ
+    vertex.z = Math.sin(dist * Math.PI) * curveStrength;
+    
+    positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
+}
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+        <summary>花びらの材質設定</summary>
+        <p>
+            <code id="code1">
+// 花びらの材質設定
+const material = new THREE.MeshStandardMaterial({
+    color: color,        // 色
+    transparent: true,   // 透明度を有効
+    opacity: 0.9        // 透明度（90%不透明）
+});
+
+const petal = new THREE.Mesh(geometry, material);
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    
+        </div>
         </div>
 
     <!-- 桜の花びらのセクション -->
+    <div class="demo-flex">
         <div class="demo-section">
             <div class="info">
                 🌸 桜の花<br>
                 マウスでドラッグして回転できます
             </div>
-            <canvas id="sakuraCanvas" width="800" height="600"></canvas>
+            <canvas id="sakuraCanvas" width="600" height="480"></canvas>
         </div>
+        <div class="demo-explain">
+            <p>このセクションでは、先ほどの桜の花びらを組み合わせて、一輪の桜の花を作成します。
+            花びらを放射状に配置し、雄蕊と雌蕊を追加して、よりリアルな桜の花を表現します。<br>
+            花びらの色や形状を調整することで、より自然な見た目を実現しています。<br>
+            </p>
+
+         <details>
+        <summary>桜の花の構成要素の組み立て</summary>
+        <p>
+            <code id="code1">
+// 桜の花全体を作成
+const sakuraFlower = new THREE.Group();
+
+// 5枚の花びらを放射状に配置
+for (let i = 0; i < 5; i++) {
+    const angle = (i / 5) * Math.PI * 2;  // 72度ずつ配置
+    const petal = createRealisticSakuraPetal(0.2, 0xff69b4, angle, i);
+    sakuraFlower.add(petal);
+}
+
+// 雄蕊と雌蕊を追加
+const stamens = createStamen(15);
+const pistil = createPistil();
+sakuraFlower.add(stamens);
+sakuraFlower.add(pistil);
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    </div>
+    </div>
         
         <!-- カーネーションの花のセクション -->
         <div class="demo-section">
@@ -138,7 +296,7 @@
                 🌸 カーネーションの花<br>
                 マウスでドラッグして回転できます
             </div>
-        <canvas id="karnersionCanvas" width="800" height="600"></canvas>
+        <canvas id="karnersionCanvas" width="600" height="480"></canvas>
         </div>
         
 
@@ -148,7 +306,7 @@
                 🌹 3D立体バラの花<br>
                 マウスでドラッグして回転できます
             </div>
-            <canvas id="threejs-canvas" width="800" height="600"></canvas>
+            <canvas id="threejs-canvas" width="600" height="480"></canvas>
         </div>
         
         
@@ -164,7 +322,7 @@
     </div>
 
     <h1>本コンテンツの作成時間</h1>
-    <p>約6.5時間</p>
+    <p>約7時間</p>
 
     <h1>参考資料</h1>
     <ul>

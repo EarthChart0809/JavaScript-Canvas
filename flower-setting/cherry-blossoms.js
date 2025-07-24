@@ -59,6 +59,12 @@ function initSakura() {
         petalShape.quadraticCurveTo(-size * 0.6, size * 1.2, -size * 0.9, size * 1.1);
         petalShape.quadraticCurveTo(-size * 1.0, size * 0.8, -size * 0.8, size * 0.4);
         petalShape.quadraticCurveTo(-size * 0.3, size * 0.1, 0, 0);
+
+        // petalShape.quadraticCurveTo(size * 0.5, size * 0.2, size, size * 0.6);
+        // petalShape.quadraticCurveTo(size * 0.9, size * 1.0, size * 0.5, size * 1.2);
+        // petalShape.quadraticCurveTo(size * 0.2, size * 1.3, 0, size * 1.0);
+        // petalShape.quadraticCurveTo(-size * 0.2, size * 0.7, -size * 0.1, size * 0.3);
+        // petalShape.quadraticCurveTo(-size * 0.05, size * 0.1, 0, 0);
         
         const extrudeSettings = {
             depth: 0.015,
@@ -135,7 +141,7 @@ function initSakura() {
             const stalk = new THREE.Mesh(stalkGeometry, stalkMaterial);
             
             // 雄蕊の葯（やく）
-            const antherGeometry = new THREE.SphereGeometry(0.008, 8, -8);
+            const antherGeometry = new THREE.SphereGeometry(0.008, 8, 8);
             const antherMaterial = new THREE.MeshStandardMaterial({ 
                 color: 0xffd700 // 金色
             });
@@ -143,19 +149,42 @@ function initSakura() {
             anther.position.y = 0.04;
             
             // ランダムな位置に配置
-            const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
-            const radius = Math.random() * 0.05 + 0.02;
-            
-            const stamenUnit = new THREE.Group();
-            stamenUnit.add(stalk);
-            stamenUnit.add(anther);
-            
-            stamenUnit.position.x = Math.cos(angle) * radius;
-            stamenUnit.position.y = Math.sin(angle) * radius;
-            stamenUnit.position.z = Math.random() * 0.01;
-            
-            stamenGroup.add(stamenUnit);
+            const angle = (i / count) * Math.PI * 2;
+const radius = 0.03 + Math.PI * 0.02;
+
+// 雄蕊（おしべ）の部品をグループ化
+const stamenUnit = new THREE.Group();
+stamenUnit.add(stalk);
+stamenUnit.add(anther);
+
+// 配置：めしべを中心に円形
+stamenUnit.position.x = Math.cos(angle) * radius;
+stamenUnit.position.y = Math.sin(angle) * radius;
+stamenUnit.position.z = 0.005 + Math.random() * 0.005;
+
+// 向き調整：中心から外側に向ける
+// -----------------------------------
+const direction = new THREE.Vector3(
+    Math.cos(angle),
+    Math.sin(angle),
+    2.4  // 少し上向きに
+).normalize();
+
+const quaternion = new THREE.Quaternion();
+quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction); // Y軸から方向へ回す
+stamenUnit.setRotationFromQuaternion(quaternion);
+
+// 少しランダムに傾けると自然
+stamenUnit.rotation.x += (Math.random() - 0.5) * 0.2;
+stamenUnit.rotation.y += (Math.random() - 0.5) * 0.2;
+// -----------------------------------
+
+stamenGroup.add(stamenUnit);
+
         }
+         // ★追加：雄蕊全体を90度傾ける
+        stamenGroup.rotation.x = Math.PI / 2; // 90度回転
+        stamenGroup.position.set(0, -0.05, 0); // 少し前に配置
         
         return stamenGroup;
     }
@@ -174,11 +203,14 @@ function initSakura() {
             color: 0xffffff // 白色
         });
         const stigma = new THREE.Mesh(stigmaGeometry, stigmaMaterial);
-        stigma.position.y = 0.045;
+        stigma.position.y = 0.035;
         
         const pistilGroup = new THREE.Group();
         pistilGroup.add(pistil);
         pistilGroup.add(stigma);
+
+         // 雌蕊を中央に固定
+        pistilGroup.position.set(0, 0, 0.00); // 少し前に
         
         return pistilGroup;
     }
@@ -196,11 +228,12 @@ function initSakura() {
     }
     
     // 雄蕊を追加
-    const stamens = createStamen(15);
+    const stamens = createStamen(8);
     sakuraFlower.add(stamens);
     
     // 雌蕊を追加
     const pistil = createPistil();
+    pistil.position.y = -0.02; // 少し上に配置
     sakuraFlower.add(pistil);
     
     // 花の台座（がく）
@@ -209,13 +242,14 @@ function initSakura() {
         color: 0x228b22 // 緑色
     });
     const calyx = new THREE.Mesh(calyxGeometry, calyxMaterial);
-    calyx.position.z = 0.02;
-    calyx.rotation.x = Math.PI;
+    calyx.position.z = 0.00;
+    calyx.position.y = 0.02; // 少し下に配置
+    calyx.rotation.x = Math.PI*2;
     sakuraFlower.add(calyx);
 
     // 追加
     sakuraFlower.rotation.x = Math.PI; // 180度回転で花を上向きに
-    stamens.rotation.x = Math.PI; // 雄蕊を下向きに
+    stamens.rotation.x = Math.PI/2; // 雄蕊を下向きに
     pistil.rotation.x = Math.PI; // 雌蕊を下向きに
 
     scene.add(sakuraFlower);
@@ -241,7 +275,7 @@ function initSakura() {
         controls.update();
         
         // 花全体をゆっくり回転
-        sakuraFlower.rotation.y += 0.003;
+        sakuraFlower.rotation.y += 0.002;
         
         // 微細な風の効果
         const time = Date.now() * 0.001;

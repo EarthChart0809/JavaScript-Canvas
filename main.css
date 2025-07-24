@@ -120,6 +120,14 @@ header nav {
     color: #fff; /* ホバー時の文字色を白に変更 */
   }
 
+  .demo-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* 要素間のスペースを調整 */
+  }
+
 
 /* メディアクエリ: 768px以下の画面サイズ（タブレット） */
 @media (max-width: 768px) {

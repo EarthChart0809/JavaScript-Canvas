@@ -26,7 +26,7 @@ function initPetal() {
     renderer.setPixelRatio(window.devicePixelRatio);
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x87ceeb); // 夜空のような背景
+    scene.background = new THREE.Color(0xf3f9f1); // 夜空のような背景
 
     // ★修正：canvasのアスペクト比を使用
     const camera = new THREE.PerspectiveCamera(75, 800 / 600, 0.1, 1000);
@@ -62,7 +62,7 @@ function createSakuraPetal(size, color, position) {
     const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
     geometry.translate(-size / 2, -size / 2, 0); // 中心を原点に
 
-    // ✅ ジオメトリに手動で湾曲を加える
+    // ジオメトリに手動で湾曲を加える
     const positionAttribute = geometry.attributes.position;
     const vertex = new THREE.Vector3();
     for (let i = 0; i < positionAttribute.count; i++) {
@@ -113,11 +113,11 @@ renderer.render(scene, camera);
 animate();
 
     // 固定サイズなので変更しない
-    camera.aspect = 800 / 600;
-    renderer.setSize(800, 600, false); // 固定サイズに設定
+    camera.aspect = 250 / 200;
+    renderer.setSize(300, 300, false); // 固定サイズに設定
 
-canvas.width = 800;
-canvas.height = 600;
-canvas.style.width = '800px';
-canvas.style.height = '600px';
+canvas.width = 480;
+canvas.height = 360;
+canvas.style.width = '480px';
+canvas.style.height = '360px';
 }
