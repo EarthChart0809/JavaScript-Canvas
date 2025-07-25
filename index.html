@@ -162,7 +162,7 @@ animate();
                 🌸 桜の花びら<br>
                 マウスでドラッグして回転できます
             </div>
-            <canvas id="petalCanvas" width="600" height="480"></canvas>
+            <canvas id="petalCanvas" width="480" height="360"></canvas>
         </div>
 
         <div class="demo-explain">
@@ -256,7 +256,7 @@ const petal = new THREE.Mesh(geometry, material);
                 🌸 桜の花<br>
                 マウスでドラッグして回転できます
             </div>
-            <canvas id="sakuraCanvas" width="600" height="480"></canvas>
+            <canvas id="sakuraCanvas" width="480" height="360"></canvas>
         </div>
         <div class="demo-explain">
             <p>このセクションでは、先ほどの桜の花びらを組み合わせて、一輪の桜の花を作成します。
@@ -289,7 +289,15 @@ sakuraFlower.add(pistil);
     </details>
     </div>
     </div>
-        
+
+    <div class="demo-section">
+        <div class="info">
+            桜の枝<br>
+            マウスでドラッグして回転できます
+        </div>
+    <canvas id="treeCanvas" width="600" height="480"></canvas>
+    </div>
+
         <!-- カーネーションの花のセクション -->
         <div class="demo-section">
             <div class="info">
@@ -315,6 +323,8 @@ sakuraFlower.add(pistil);
     <!-- JSファイルをモジュールとして読み込み -->
     <script type="module" src="flower-setting/cherry-blossoms.js"></script>
 
+    <script type="module" src="flower-setting/tree_trunk.js"></script>
+
     <script type="module" src="flower-setting/karnersion.js"></script>
 
     <!-- Three.js スクリプト（バラの花） -->
@@ -322,7 +332,7 @@ sakuraFlower.add(pistil);
     </div>
 
     <h1>本コンテンツの作成時間</h1>
-    <p>約7時間</p>
+    <p>約8時間</p>
 
     <h1>参考資料</h1>
     <ul>
