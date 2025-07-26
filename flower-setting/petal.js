@@ -30,7 +30,7 @@ function initPetal() {
 
     // ★修正：canvasのアスペクト比を使用
     const camera = new THREE.PerspectiveCamera(75, 800 / 600, 0.1, 1000);
-    camera.position.set(0, 0, 2); // ★修正：より適切な位置
+    camera.position.set(0, 0, 1); // ★修正：より適切な位置
 
     // OrbitControlsを追加
     const controls = new OrbitControls(camera, renderer.domElement);
