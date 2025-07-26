@@ -143,8 +143,6 @@ animate();
             <button onclick="copyToClipboard('code1')">コピー</button>
         </p>
     </details>
-        
-
 
         <h2>3Dの花を作成する</h2>
         <p>3Dの花を作成するために、Three.jsを使用して立体的な花のモデルを作成します。花びらや茎、葉っぱを個別に作成し、<br>
@@ -152,7 +150,7 @@ animate();
     </div>
     </div>
 
-    <h1>🌹 Three.js 3D花園 🌸</h1>
+    <h1> Three.js 3D花園 </h1>
     
     <div class="canvas-container">
         <!-- 桜の花びらのセクション -->
@@ -290,6 +288,7 @@ sakuraFlower.add(pistil);
     </div>
     </div>
 
+    <div class="demo-flex">
     <div class="demo-section">
         <div class="info">
             桜の枝<br>
@@ -297,7 +296,125 @@ sakuraFlower.add(pistil);
         </div>
     <canvas id="treeCanvas" width="600" height="480"></canvas>
     </div>
+     <div class="demo-explain">
+            <p>このセクションでは、桜の枝を作成します。<br>
+            枝の形状や配置を工夫することで、より自然な桜の木を表現します。<br>
+            </p>
 
+         <details>
+        <summary>桜の枝の節</summary>
+        <p>
+            <code id="code1">
+// ★節の情報を定義
+const nodes = [
+    { position: new THREE.Vector3(0, 0, 0), direction: new THREE.Vector3(1, 0, 0) },
+    { position: new THREE.Vector3(0.4, 0.1, 0.05), direction: new THREE.Vector3(0.8, 0.6, -0.1) },
+    { position: new THREE.Vector3(0.7, 0.35, 0), direction: new THREE.Vector3(0.6, 0.8, 0.2) },
+    { position: new THREE.Vector3(0.9, 0.7, 0.15), direction: new THREE.Vector3(0.3, 0.9, -0.1) },
+    { position: new THREE.Vector3(1.0, 1.1, 0.1), direction: new THREE.Vector3(0.2, 1.0, 0.1) }
+];
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+     <details>
+        <summary>桜の枝の接続</summary>
+        <p>
+            <code id="code1">
+// ★節間のセグメントを作成
+for (let i = 0; i < nodes.length - 1; i++) {
+    const startNode = nodes[i];
+    const endNode = nodes[i + 1];
+    
+    // セグメントの長さ
+    const segmentLength = startNode.position.distanceTo(endNode.position);
+    
+    // ★適度に真っ直ぐなセグメント作成
+    const segmentGeometry = new THREE.CylinderGeometry(
+        0.02 * (1 - i * 0.15), // 先端に向かって細くなる
+        0.025 * (1 - i * 0.1),
+        segmentLength,
+        12
+    );
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+        <summary>桜の枝の階層分岐</summary>
+        <p>
+            <code id="code1">
+// ★節（ふし）を作成
+for (let i = 1; i < nodes.length - 1; i++) {
+    const node = nodes[i];
+    
+    // 節の膨らみ
+    const nodeGeometry = new THREE.SphereGeometry(0.018, 12, 12);
+    const nodeSwelling = new THREE.Mesh(nodeGeometry, barkMaterial);
+    nodeSwelling.position.copy(node.position);
+    
+    // ★節から小枝を追加（1-2本）
+    const subBranchCount = Math.random() > 0.5 ? 1 : 2;
+    for (let j = 0; j < subBranchCount; j++) {
+        createSubBranch(node.position, branchGroup, barkMaterial, i);
+    }
+}
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+        <summary>桜の小枝の構造</summary>
+        <p>
+            <code id="code1">
+// ★小枝のセグメント数（2-4個に増加）
+const segments = 2 + Math.floor(Math.random() * 3);
+
+// ★小枝の節の位置を定義
+const subNodes = [];
+for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const position = new THREE.Vector3()
+        .copy(nodePosition)
+        .add(branchDirection.clone().multiplyScalar(branchLength * t));
+    
+    // 小さなランダムな変化を追加
+    position.add(new THREE.Vector3(
+        (Math.random() - 0.5) * 0.02,
+        (Math.random() - 0.5) * 0.02,
+        (Math.random() - 0.5) * 0.02
+    ));
+    
+    subNodes.push(position);
+}
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+    <summary>桜の小枝の三次分岐</summary>
+        <p>
+            <code id="code1">
+// ★新しい関数：三次分岐（小枝から更に分岐）
+function createTertiaryBranch(nodePosition, parentGroup, material, generation) {
+    // より細い枝の方向
+    const branchDirection = new THREE.Vector3(
+        (Math.random() - 0.5) * 2,
+        Math.random() * 0.6 + 0.1, // 上向き傾向を弱める
+        (Math.random() - 0.5) * 2
+    ).normalize();
+
+    // より短い枝
+    const branchLength = 0.08 + Math.random() * 0.15;
+    const segments = 1 + Math.floor(Math.random() * 2); // 1-2セグメント
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    </div>
+    </div>
+
+    <div class="demo-flex">
     <div class="demo-section">
         <div class="info">
             桜<br>
@@ -305,15 +422,28 @@ sakuraFlower.add(pistil);
         </div>
     <canvas id="cherryBlossomCanvas" width="600" height="480"></canvas>
     </div>
-        
-        <!-- バラの花のセクション -->
-        <div class="demo-section">
-            <div class="info">
-                🌹 3D立体バラの花<br>
-                マウスでドラッグして回転できます
-            </div>
-            <canvas id="threejs-canvas" width="600" height="480"></canvas>
-        </div>
+    <div class="demo-explain">
+            <p>このセクションでは、今まで作成した桜の花、枝を使い、1本の枝付き桜を作成しました。<br>
+            javascriptのexportを使用して、各コンポーネントをモジュール化し、再利用可能な形に整えます。<br>
+            </p>
+
+         <details>
+        <summary>exportの例</summary>
+        <p>
+            <code id="code1">
+export function createSakuraFlower(scale = 1) {
+    // 花びらを1つだけ作成
+    const petal = createSakuraPetal(0.5, 0xff69b4, new THREE.Vector3(0, 0, 0));
+    petal.rotation.x = Math.PI / 2;
+
+    return petal;
+}
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    </div>
+    </div>
         
         
     <script type="module" src="flower-setting/petal.js"></script>

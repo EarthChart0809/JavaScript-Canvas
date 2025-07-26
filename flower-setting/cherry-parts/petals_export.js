@@ -45,11 +45,11 @@ export function createRealisticSakuraPetal(size, color, angle, index) {
     positionAttribute.needsUpdate = true;
     petalGeometry.computeVertexNormals();
     
-    // より細かい色のバリエーション
-    const baseColor = new THREE.Color(color);
+    // // より細かい色のバリエーション
+    // const baseColor = new THREE.Color(color);
     
     const petalMaterial = new THREE.MeshPhongMaterial({
-        color: baseColor,
+        color: 0xff69b4,
         transparent: true,
         opacity: 0.92,
         side: THREE.DoubleSide,
@@ -69,6 +69,8 @@ export function createRealisticSakuraPetal(size, color, angle, index) {
     petal.rotation.z = angle + Math.PI / 2;
     petal.rotation.x = -Math.PI / 2 + Math.sin(index) * 0.05; // 微細な個体差
     petal.rotation.y = (Math.random() - 0.5) * 0.1; // 自然なばらつき
+
+    
     
     return petal;
 }

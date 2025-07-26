@@ -43,27 +43,34 @@ function initSakura() {
     controls.dampingFactor = 0.05;
 
     // 雄蕊を作成する関数（1つだけ）
-    function createStamen(count = 15) {
+    function createStamen(count = 15, sizeScale = 2.0) { // ★サイズパラメータ追加
         const stamenGroup = new THREE.Group();
         
         for (let i = 0; i < count; i++) {
-            // 雄蕊の軸
-            const stalkGeometry = new THREE.CylinderGeometry(0.002, 0.003, 0.08);
+            // ★雄蕊の軸のサイズ調整
+            const stalkGeometry = new THREE.CylinderGeometry(
+                0.002 * sizeScale,  // ★上端の半径
+                0.003 * sizeScale,  // ★下端の半径  
+                0.08 * sizeScale    // ★高さ
+            );
             const stalkMaterial = new THREE.MeshStandardMaterial({ 
                 color: 0x90ee90 
             });
             const stalk = new THREE.Mesh(stalkGeometry, stalkMaterial);
             
-            // 雄蕊の葯（やく）
-            const antherGeometry = new THREE.SphereGeometry(0.008, 8, 8);
+            // ★葯（やく）のサイズ調整
+            const antherGeometry = new THREE.SphereGeometry(
+                0.008 * sizeScale,  // ★葯の半径
+                8, 8
+            );
             const antherMaterial = new THREE.MeshStandardMaterial({ 
                 color: 0xffd700 
             });
             const anther = new THREE.Mesh(antherGeometry, antherMaterial);
-            anther.position.y = 0.04;
+            anther.position.y = 0.04 * sizeScale; // ★葯の位置も調整
             
             const angle = (i / count) * Math.PI * 2;
-            const radius = 0.03 + Math.random() * 0.02;
+            const radius = (0.03 + Math.random() * 0.02) * sizeScale; // ★配置半径も調整
 
             const stamenUnit = new THREE.Group();
             stamenUnit.add(stalk);
@@ -71,8 +78,9 @@ function initSakura() {
 
             stamenUnit.position.x = Math.cos(angle) * radius;
             stamenUnit.position.y = Math.sin(angle) * radius;
-            stamenUnit.position.z = 0.005 + Math.random() * 0.005;
+            stamenUnit.position.z = (0.005 + Math.random() * 0.005) * sizeScale; // ★Z位置も調整
 
+            // 向きは変更なし
             const direction = new THREE.Vector3(
                 Math.cos(angle),
                 Math.sin(angle),
@@ -92,21 +100,29 @@ function initSakura() {
         return stamenGroup;
     }
 
-    // 雌蕊を作成する関数（1つだけ）
-    function createPistil() {
-        const pistilGeometry = new THREE.CylinderGeometry(0.004, 0.004, 0.06);
+    // 雌蕊を作成する関数（サイズ調整可能版）
+    function createPistil(sizeScale = 2.0) { // ★サイズパラメータ追加
+        // ★雌蕊の軸のサイズ調整
+        const pistilGeometry = new THREE.CylinderGeometry(
+            0.004 * sizeScale,  // ★上端の半径
+            0.004 * sizeScale,  // ★下端の半径
+            0.06 * sizeScale    // ★高さ
+        );
         const pistilMaterial = new THREE.MeshStandardMaterial({ 
             color: 0x98fb98 
         });
         const pistil = new THREE.Mesh(pistilGeometry, pistilMaterial);
         
-        // 雌蕊の先端（柱頭）
-        const stigmaGeometry = new THREE.SphereGeometry(0.006, 8, 8);
+        // ★雌蕊の先端（柱頭）のサイズ調整
+        const stigmaGeometry = new THREE.SphereGeometry(
+            0.006 * sizeScale,  // ★柱頭の半径
+            8, 8
+        );
         const stigmaMaterial = new THREE.MeshStandardMaterial({ 
             color: 0xffffff 
         });
         const stigma = new THREE.Mesh(stigmaGeometry, stigmaMaterial);
-        stigma.position.y = 0.035;
+        stigma.position.y = 0.035 * sizeScale; // ★柱頭の位置も調整
         
         const pistilGroup = new THREE.Group();
         pistilGroup.add(pistil);
@@ -116,7 +132,7 @@ function initSakura() {
     }
 
     // ★修正：インポートした花びら1枚で完全な桜の花を作成
-    function createCompleteSakuraFlower() {
+    function createCompleteSakuraFlower(stamenScale = 2.5, pistilScale = 2.5, calyxScale = 2.5) {
         const completeFlower = new THREE.Group();
         
         try {
@@ -127,10 +143,10 @@ function initSakura() {
                 const angle = (i / 5) * Math.PI * 2;
                 
                 // ★重要：花びら1枚だけを作成する関数を使用
-                const petal = createRealisticSakuraPetal(0.8); // 花びら1枚
+                const petal = createRealisticSakuraPetal(0.65); // 花びら1枚
                 
                 // 花びらの位置と回転を調整
-                const radius = 0.06; // 中心からの距離を調整
+                const radius = 0.00; // 中心からの距離を調整
                 petal.position.x = Math.cos(angle) * radius;
                 petal.position.y = Math.sin(angle) * radius;
                 petal.position.z = Math.sin(i) * 0.005;
@@ -156,7 +172,7 @@ function initSakura() {
                 
                 const petalGeometry = new THREE.PlaneGeometry(0.15, 0.25);
                 const petalMaterial = new THREE.MeshStandardMaterial({
-                    color: 0xffb7c5,
+                    color: 0xff69b4,
                     transparent: true,
                     opacity: 0.9,
                     side: THREE.DoubleSide
@@ -178,27 +194,31 @@ function initSakura() {
         // ★重要：雄蕊、雌蕊、がくは1セットだけ追加
         
         // 雄蕊を1セット追加
-        const stamens = createStamen(15);
+        const stamens = createStamen(15, stamenScale);
         stamens.position.set(0, 0, 0.00);
         completeFlower.add(stamens);
         stamens.rotation.x = -Math.PI / 2; // 雄蕊を下向きに配置
         
         // 雌蕊を1つ追加
-        const pistil = createPistil();
+        const pistil = createPistil(pistilScale);
         pistil.position.set(0, 0, 0.00);
         completeFlower.add(pistil);
         
         // がくを1つ追加
-        const calyxGeometry = new THREE.ConeGeometry(0.08, 0.03, 5);
+        const calyxGeometry = new THREE.ConeGeometry(
+            0.08 * calyxScale,  // ★がくの底面半径
+            0.03 * calyxScale,  // ★がくの高さ
+            5
+        );
         const calyxMaterial = new THREE.MeshStandardMaterial({ 
             color: 0x228b22 
         });
         const calyx = new THREE.Mesh(calyxGeometry, calyxMaterial);
-        calyx.position.set(0, -0.02, 0);
+        calyx.position.set(0, -0.02 * calyxScale, 0); // ★位置もスケールに合わせる
         calyx.rotation.x = Math.PI;
         completeFlower.add(calyx);
 
-        console.log('✅ 完全な桜の花完成: 花びら5枚 + 雄蕊1セット + 雌蕊1つ + がく1つ');
+        console.log(`✅ 完全な桜の花完成: 雄蕊${stamenScale}x + 雌蕊${pistilScale}x + がく${calyxScale}x`);
         
         return completeFlower;
     }

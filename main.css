@@ -189,6 +189,69 @@ header nav {
         font-size: 1.1em;
     }
 
+    .Introduction {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+    
+    .Introduction h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .Introduction p {
+        font-size: 0.9rem;
+    }
+    
+    .Introduction summary {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .Introduction code {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .Introduction button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+        margin: 0.5rem 0 0 0.5rem;
+    }
+
+    .canvas-container {
+        padding: 1.5rem 1rem;
+        margin: 1rem auto;
+        border-radius: 15px;
+    }
+    
+    .demo-section {
+        padding: 1rem;
+    }
+    
+    .demo-explain {
+        padding: 1.5rem;
+    }
+    
+    .demo-section canvas {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .canvas-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .info {
+        font-size: 1rem;
+    }
+    
+    .demo-explain code {
+        font-size: 0.8rem;
+        padding: 1rem;
+    }
+
 }
 
 /* メディアクエリ: 480px以下の画面サイズ（スマホ） */
@@ -243,6 +306,36 @@ header nav {
         width: 22px;
         height: 22px;
         left: 12px;
+    }
+
+     .canvas-container {
+        padding: 1rem 0.5rem;
+        margin: 0.5rem auto;
+    }
+    
+    .canvas-container::after {
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .demo-section, .demo-explain {
+        padding: 1rem;
+    }
+    
+    .canvas-container h1 {
+        font-size: 1.5rem;
+    }
+    
+    .demo-explain summary {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .demo-explain button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+        margin: 0.5rem 0 0 0.5rem;
     }
 }
 
@@ -487,5 +580,454 @@ header nav {
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+/* Introduction セクションの基本スタイル */
+.Introduction {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景装飾 */
+.Introduction::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* 見出しのスタイル */
+.Introduction h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+    border-left: 4px solid #ff69b4;
+    position: relative;
+}
+
+.Introduction h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #ff69b4, #ffc0cb);
+    border-radius: 1px;
+}
+
+/* 特別な見出し装飾 */
+.Introduction h2:first-of-type {
+    border-left-color: #4ecdc4;
+}
+
+.Introduction h2:first-of-type::after {
+    background: linear-gradient(90deg, #4ecdc4, #a8edea);
+}
+
+.Introduction h2:nth-of-type(2) {
+    border-left-color: #45b7d1;
+}
+
+.Introduction h2:nth-of-type(2)::after {
+    background: linear-gradient(90deg, #45b7d1, #96c9dc);
+}
+
+.Introduction h2:nth-of-type(3) {
+    border-left-color: #f39c12;
+}
+
+.Introduction h2:nth-of-type(3)::after {
+    background: linear-gradient(90deg, #f39c12, #f7dc6f);
+}
+
+/* 段落のスタイル */
+.Introduction p {
+    line-height: 1.8;
+    color: #34495e;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+    text-align: justify;
+    position: relative;
+}
+
+.Introduction p::first-line {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.Introduction button:hover {
+    background: linear-gradient(135deg, #ee5a6f 0%, #ff6b6b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.Introduction button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(255, 107, 107, 0.3);
+}
+
+/* アニメーション */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.Introduction {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    .Introduction {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #ecf0f1;
+    }
+    
+    .Introduction h2 {
+        color: #ecf0f1;
+    }
+    
+    .Introduction p {
+        color: #bdc3c7;
+    }
+    
+    .Introduction details {
+        background: rgba(52, 73, 94, 0.7);
+    }
+    
+    .Introduction details[open] {
+        background: rgba(52, 73, 94, 0.9);
+    }
+}
+
+/* ホバー効果の追加 */
+.Introduction h2:hover {
+    transform: translateX(5px);
+    transition: transform 0.3s ease;
+}
+
+.Introduction p:hover {
+    color: #2c3e50;
+    transition: color 0.3s ease;
+}
+
+/* スクロール効果 */
+.Introduction {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* 特別な装飾要素 */
+.Introduction::after {
+    content: '🌸';
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    opacity: 0.6;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Canvas Container の基本スタイル */
+.canvas-container {
+    background: linear-gradient(135deg, #f8fffe 0%, #f0f8ff 100%);
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px;
+}
+
+/* 背景装飾 */
+.canvas-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.05) 0%, transparent 70%);
+    z-index: -1;
+    animation: rotate 20s linear infinite;
+}
+
+.canvas-container::after {
+    content: '🌸';
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* タイトルのスタイル */
+.canvas-container h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+    background: linear-gradient(45deg, #ff6b9d, #c44569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.canvas-container h1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b9d, #c44569);
+    border-radius: 2px;
+}
+
+/* Demo Flex レイアウト */
+.demo-flex {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+/* Demo Section スタイル */
+.demo-section {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-width: 350px;
+}
+
+.demo-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.info::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+/* Canvas要素のスタイル */
+.demo-section canvas {
+    border: 3px solid transparent;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+.demo-section canvas:hover {
+    border-color: rgba(255, 107, 157, 0.5);
+    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.2);
+    transform: scale(1.02);
+}
+
+/* Demo Explain セクション */
+.demo-explain {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #ff6b9d;
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.demo-explain p {
+    line-height: 1.8;
+    color: #34495e;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.demo-explain p::first-line {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.demo-explain summary::-webkit-details-marker {
+    display: none;
+}
+
+.demo-explain details[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.demo-explain button:hover {
+    background: linear-gradient(135deg, #e55a87 0%, #b53f5e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+}
+
+.demo-explain button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(255, 107, 157, 0.3);
+}
+
+/* アニメーション */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.demo-flex {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1024px) {
+    .canvas-container {
+        padding: 2rem 1.5rem;
+        margin: 1.5rem auto;
+    }
+    
+    .demo-flex {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .demo-section, .demo-explain {
+        min-width: unset;
+        width: 100%;
+    }
+    
+    .canvas-container h1 {
+        font-size: 2rem;
+    }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    .canvas-container {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+    
+    .demo-section {
+        background: rgba(52, 73, 94, 0.9);
+        color: #ecf0f1;
+    }
+    
+    .demo-explain {
+        background: rgba(52, 73, 94, 0.95);
+        color: #ecf0f1;
+        border-left-color: #e74c3c;
+    }
+    
+    .demo-explain p {
+        color: #bdc3c7;
+    }
+    
+    .demo-section canvas {
+        background: linear-gradient(45deg, #34495e, #2c3e50);
+    }
+}
+
+/* スクロール効果 */
+.canvas-container {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* ホバー時の特殊効果 */
+.demo-section:hover::after {
+    content: '✨';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    animation: float 2s ease-in-out infinite;
+}
+
+/* グリッドレイアウトの代替案 */
+@supports (display: grid) {
+    .demo-flex {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+    
+    @media (max-width: 768px) {
+        .demo-flex {
+            grid-template-columns: 1fr;
+        }
     }
 }
