@@ -76,8 +76,12 @@
             <img src="./image/reaf2.png" alt="桜の葉っぱ2" class="right-icon">
         </li>
         <li>
-            3Dの花を作成する
+            カメラ・光源について
             <img src="./image/reaf1.png" alt="桜の葉っぱ1" class="right-icon">
+        </li>
+        <li>
+            3Dの花を作成する
+            <img src="./image/reaf2.png" alt="桜の葉っぱ2" class="right-icon">
         </li>
     </ul>
 </div>
@@ -90,7 +94,7 @@
 
         <h2>JavaScriptの基本説明</h2>
         <p>JavaScriptは、Webブラウザ上で動作するプログラミング言語であり、主にユーザーインターフェースの操作やデータの<br>
-            処理に使用されます。JavaScriptの基本的な文法や構文について学ぶことは、Web開発において非常に重要です。</p>
+            処理に使用されます。JavaScriptの基本的な文法や構文について学ぶことは、Web開発において重要です。</p>
         
         <h2>Three.jsの導入について</h2>
         <p>Three.jsは、WebGLを使用して3Dグラフィックスを描画するためのJavaScriptライブラリです。<br>
@@ -154,6 +158,31 @@ function animate() {
 
 // アニメーション開始
 animate();
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+        <h2>カメラ・光源について</h2>
+        <p>Three.jsでは、カメラと光源の設定が重要です。カメラはシーンをどのように見るかを決定し、光源はオブジェクトの見え方に影響を与えます。<br>
+            ここでは、基本的なカメラと光源の設定方法について説明します。</p>
+            <details>
+        <summary>カメラ・光源の基本</summary>
+        <p>
+            <code id="code1">
+// カメラの設定
+const camera = new THREE.PerspectiveCamera(
+    60,                           // fov: 視野角（度）
+    canvas.width / canvas.height, // aspect: アスペクト比
+    0.1,                         // near: 近クリップ面
+    1000                         // far: 遠クリップ面
+);
+camera.position.set(0, 0.5, 1.5);
+
+// 光源の設定
+const sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
+sunLight.position.set(3, 5, 2);
+sunLight.castShadow = true;
+scene.add(sunLight);
             </code>
             <button onclick="copyToClipboard('code1')">コピー</button>
         </p>
@@ -275,7 +304,7 @@ const petal = new THREE.Mesh(geometry, material);
         </div>
         <div class="demo-explain">
             <p>このセクションでは、先ほどの桜の花びらを組み合わせて、一輪の桜の花を作成します。
-            花びらを放射状に配置し、雄蕊と雌蕊を追加して、よりリアルな桜の花を表現します。<br>
+            上記の花びらを放射状に配置し、雄蕊と雌蕊を追加して、よりリアルな桜の花を表現します。<br>
             花びらの色や形状を調整することで、より自然な見た目を実現しています。<br>
             </p>
 
@@ -302,6 +331,79 @@ sakuraFlower.add(pistil);
             <button onclick="copyToClipboard('code1')">コピー</button>
         </p>
     </details>
+    <details>
+        <summary>雄蕊の作成</summary>
+        <p>
+            <code id="code1">
+// 雄蕊を作成する関数
+function createStamen(count = 15, sizeScale = 2.0) {
+    // 15本の雄蕊を円形に配置
+    for (let i = 0; i < count; i++) {
+        // 軸（stalk）: 細い円柱
+        const stalkGeometry = new THREE.CylinderGeometry(
+            0.002 * sizeScale,  // 上端半径
+            0.003 * sizeScale,  // 下端半径
+            0.08 * sizeScale    // 高さ
+        );
+        
+        // 葯（anther）: 花粉を含む球体
+        const antherGeometry = new THREE.SphereGeometry(
+            0.008 * sizeScale, 8, 8
+        );
+        
+        // 円形配置の計算
+        const angle = (i / count) * Math.PI * 2;
+        const radius = (0.03 + Math.random() * 0.02) * sizeScale;
+    }
+}
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+        <summary>雌蕊の作成</summary>
+        <p>
+            <code id="code1">
+// 雌蕊を作成する関数
+function createPistil(sizeScale = 2.0) {
+    // 雌蕊の軸: 円柱
+    const pistilGeometry = new THREE.CylinderGeometry(
+        0.004 * sizeScale,  // 均一な太さ
+        0.004 * sizeScale,
+        0.06 * sizeScale    // 高さ
+    );
+    
+    // 柱頭（受粉部分）: 白い球体
+    const stigmaGeometry = new THREE.SphereGeometry(
+        0.006 * sizeScale, 8, 8
+    );
+}
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    <details>
+        <summary>がくの作成</summary>
+        <p>
+            <code id="code1">
+// がくを1つ追加
+        const calyxGeometry = new THREE.ConeGeometry(
+            0.08 * calyxScale,  // ★がくの底面半径
+            0.03 * calyxScale,  // ★がくの高さ
+            5
+        );
+        const calyxMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0x228b22 
+        });
+        const calyx = new THREE.Mesh(calyxGeometry, calyxMaterial);
+        calyx.position.set(0, -0.02 * calyxScale, 0); // ★位置もスケールに合わせる
+        calyx.rotation.x = Math.PI;
+        completeFlower.add(calyx);
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+    
     </div>
     </div>
 
@@ -459,6 +561,19 @@ export function createSakuraFlower(scale = 1) {
             <button onclick="copyToClipboard('code1')">コピー</button>
         </p>
     </details>
+    <details>
+        <summary>importの例</summary>
+        <p>
+            <code id="code1">
+import { createRealisticPlumBranch, createSubBranch, getBranchNodes,
+    createTertiaryBranch, createTinyTwig } from './cherry-parts/brunch_export.js';
+import {createSakuraFlower} from './cherry-parts/petals_export.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+            </code>
+            <button onclick="copyToClipboard('code1')">コピー</button>
+        </p>
+    </details>
+
     </div>
     </div>
         
@@ -477,7 +592,7 @@ export function createSakuraFlower(scale = 1) {
     
     <div class="time-section">
     <h1>本コンテンツの作成時間</h1>
-    <p>約15時間</p>
+    <p>約16時間</p>
     </div>
 
     <div class="reference-content">
