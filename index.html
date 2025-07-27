@@ -57,15 +57,30 @@
     <h1 class="upheader"><strong>EarthChart's JavaScript Report</strong></h1>
     <div class="contents-flex">
     <div class="contents">
-        <h1>目次</h1>
-        <ul>
-            <li>初めに</li>
-            <li>JavaScriptの基本説明</li>
-            <li>Canvas API について</li>
-            <li>アニメーション</li>
-            <li>3Dの花を作成する</li>
-        </ul>
-    </div>
+    <h1>目次</h1>
+    <ul>
+        <li>
+            初めに
+            <img src="./image/reaf1.png" alt="桜の葉っぱ1" class="right-icon">
+        </li>
+        <li>
+            JavaScriptの基本説明
+            <img src="./image/reaf2.png" alt="桜の葉っぱ2" class="right-icon">
+        </li>
+        <li>
+            Canvas API について
+            <img src="./image/reaf1.png" alt="桜の葉っぱ1" class="right-icon">
+        </li>
+        <li>
+            アニメーション
+            <img src="./image/reaf2.png" alt="桜の葉っぱ2" class="right-icon">
+        </li>
+        <li>
+            3Dの花を作成する
+            <img src="./image/reaf1.png" alt="桜の葉っぱ1" class="right-icon">
+        </li>
+    </ul>
+</div>
 
     <div class="Introduction-flex">
     <div class="Introduction">
@@ -150,7 +165,9 @@ animate();
     </div>
     </div>
 
+    <div class="title">
     <h1> Three.js 3D花園 </h1>
+    </div>
     
     <div class="canvas-container">
         <!-- 桜の花びらのセクション -->
@@ -294,7 +311,7 @@ sakuraFlower.add(pistil);
             桜の枝<br>
             マウスでドラッグして回転できます
         </div>
-    <canvas id="treeCanvas" width="600" height="480"></canvas>
+    <canvas id="treeCanvas" width="480" height="360"></canvas>
     </div>
      <div class="demo-explain">
             <p>このセクションでは、桜の枝を作成します。<br>
@@ -420,7 +437,7 @@ function createTertiaryBranch(nodePosition, parentGroup, material, generation) {
             桜<br>
             マウスでドラッグして回転できます
         </div>
-    <canvas id="cherryBlossomCanvas" width="600" height="480"></canvas>
+    <canvas id="cherryBlossomCanvas" width="480" height="360"></canvas>
     </div>
     <div class="demo-explain">
             <p>このセクションでは、今まで作成した桜の花、枝を使い、1本の枝付き桜を作成しました。<br>
@@ -457,13 +474,32 @@ export function createSakuraFlower(scale = 1) {
 
     </div>
 
+    
+    <div class="time-section">
     <h1>本コンテンツの作成時間</h1>
-    <p>約11時間</p>
+    <p>約15時間</p>
+    </div>
 
+    <div class="reference-content">
     <h1>参考資料</h1>
     <ul>
-        <li>https://developer.mozilla.org/ja/docs/Web/API/Canvas_API/Tutorial</li>
-        <li>https://qiita.com/watabo_shi/items/bf9bcd4569b6d480c608</li>
-        <li>https://logmi.jp/main/technology/330425</li>
+        <li> <h3>Mozilla Developer Network</h3>
+            <p>Canvas API の公式ドキュメント</p>
+            <a href="https://developer.mozilla.org/ja/docs/Web/API/Canvas_API/Tutorial" target="_blank" class="reference-link">
+                https://developer.mozilla.org/ja/docs/Web/API/Canvas_API/Tutorial
+            </a></li>
+        <li><h3>Qiita</h3>
+            <p>Three.js の実装に関する技術記事</p>
+            <a href="https://qiita.com/watabo_shi/items/bf9bcd4569b6d480c608" target="_blank" class="reference-link">
+                https://qiita.com/watabo_shi/items/bf9bcd4569b6d480c608
+            </a></li>
+        <li>
+            <h3>Logmi</h3>
+            <p>JavaScript Three.js の技術解説</p>
+            <a href="https://logmi.jp/main/technology/330425" target="_blank" class="reference-link">
+                https://logmi.jp/main/technology/330425
+            </a></li>
+            </ul>
+            </div>
 </body>
 </html>

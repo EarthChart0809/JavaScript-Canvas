@@ -19,7 +19,7 @@ function initPlumeTree() {
         antialias: true,
         alpha: true
     });
-    renderer.setSize(600, 480);
+    renderer.setSize(480, 360);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -27,7 +27,7 @@ function initPlumeTree() {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf3f9f1);
 
-    const camera = new THREE.PerspectiveCamera(60, 600 / 480, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(60, 480 / 360, 0.1, 1000);
     camera.position.set(1.2, 0.8, 1.5); //カメラ調整
 
     const controls = new OrbitControls(camera, renderer.domElement);

@@ -128,6 +128,34 @@ header nav {
     gap: 20px; /* 要素間のスペースを調整 */
   }
 
+  /* Three.js 3D花園 メインタイトル */
+.title {
+    background: linear-gradient(135deg, #ff6b9d 0%, #ffc0cb 100%);
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin: 3rem auto 1rem auto;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(255, 107, 157, 0.3);
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px;
+    font-size: 2.8rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.title::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    z-index: 0;
+    animation: rotate 25s linear infinite;
+}
 
 /* メディアクエリ: 768px以下の画面サイズ（タブレット） */
 @media (max-width: 768px) {
@@ -252,6 +280,48 @@ header nav {
         padding: 1rem;
     }
 
+    .time-section, .reference-content {
+        padding: 2rem 1rem;
+        margin: 2rem auto;
+        border-radius: 15px;
+    }
+    
+    .time-section h1, .reference-content h1 {
+        font-size: 2rem;
+    }
+    
+    .time-section p {
+        font-size: 2.5rem;
+    }
+    
+    .time-section::after, .reference-content::after {
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
+    }
+    
+    .reference-content li {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .reference-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .reference-content p {
+        font-size: 0.9rem;
+    }
+    
+    .reference-content .reference-link {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.8rem;
+        margin-left: 0;
+        margin-top: 0.5rem;
+        display: block;
+        text-align: center;
+    }
+
 }
 
 /* メディアクエリ: 480px以下の画面サイズ（スマホ） */
@@ -337,6 +407,46 @@ header nav {
         font-size: 0.8rem;
         margin: 0.5rem 0 0 0.5rem;
     }
+
+    .time-section, .reference-content {
+        padding: 1.5rem 0.8rem;
+        margin: 1.5rem auto;
+    }
+    
+    .time-section h1, .reference-content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .time-section p {
+        font-size: 2rem;
+    }
+    
+    .reference-content li {
+        padding: 1.2rem;
+    }
+    
+    .reference-content li::after {
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .reference-content h3 {
+        font-size: 1.1rem;
+        padding-left: 0.8rem;
+    }
+    
+    .reference-content p {
+        font-size: 0.85rem;
+        padding-left: 0.8rem;
+    }
+    
+    .reference-content .reference-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+    }
+}
 }
 
 .contents-flex {
@@ -420,16 +530,6 @@ header nav {
     position: relative;
     z-index: 1;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.contents h1::before {
-    content: '📚';
-    position: absolute;
-    left: -60px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2em;
-    animation: bounce 2s ease-in-out infinite;
 }
 
 .contents h1::after {
@@ -520,16 +620,87 @@ header nav {
     counter-reset: li-counter;
 }
 
-/* 各項目の花のアイコン */
-.contents li::after {
-    content: '🌸';
+/* リストアイテムのレイアウト調整 */
+.contents li {
+    margin: 20px 0;
+    padding: 18px 25px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-left: 5px solid transparent;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #2c3e50;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 要素を両端に配置 */
+}
+
+/* 左側のアイコンとテキストのコンテナ */
+.contents li .left-content {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+/* 左側のメニューアイコン */
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin-right: 12px;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+    filter: brightness(1) saturate(1);
+}
+
+/* 右側の桜アイコン */
+.right-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    margin-left: 12px;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+    filter: brightness(1) saturate(1);
+}
+
+/* ホバー時の効果 */
+.contents li:hover .menu-icon {
+    transform: scale(1.2) rotate(5deg);
+    filter: brightness(1.2) saturate(1.3);
+}
+
+.contents li:hover .right-icon {
+    opacity: 1;
+    transform: scale(1.2) rotate(15deg);
+    filter: brightness(1.2) saturate(1.3) drop-shadow(0 3px 8px rgba(255, 105, 180, 0.4));
+}
+
+/* 番号の位置調整 */
+.contents li::before {
+    content: counter(li-counter);
+    counter-increment: li-counter;
     position: absolute;
-    right: 20px;
+    left: -15px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.3em;
-    opacity: 0.6;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff69b4, #ffc0cb);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.9em;
+    box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
     transition: all 0.3s ease;
+    z-index: 2;
 }
 
 /* ホバー効果 */
@@ -548,18 +719,6 @@ header nav {
     transform: translateY(-50%) scale(1.1) rotate(360deg);
     box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
 }
-
-.contents li:hover::after {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.2) rotate(15deg);
-}
-
-/* 特別な項目のスタイリング */
-.contents li:nth-child(1)::after { content: '🚀'; } /* 初めに */
-.contents li:nth-child(2)::after { content: '💻'; } /* JavaScript */
-.contents li:nth-child(3)::after { content: '🎨'; } /* Canvas API */
-.contents li:nth-child(4)::after { content: '✨'; } /* アニメーション */
-.contents li:nth-child(5)::after { content: '🌱'; } /* 種の落下 */
 
 /* クリック効果 */
 .contents li:active {
@@ -846,18 +1005,6 @@ header nav {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-.info::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: rotate(45deg);
-    animation: shine 3s infinite;
-}
-
 /* Canvas要素のスタイル */
 .demo-section canvas {
     border: 3px solid transparent;
@@ -1006,16 +1153,6 @@ header nav {
     animation: fadeInUp 1s ease-out forwards;
 }
 
-/* ホバー時の特殊効果 */
-.demo-section:hover::after {
-    content: '✨';
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.2rem;
-    animation: float 2s ease-in-out infinite;
-}
-
 /* グリッドレイアウトの代替案 */
 @supports (display: grid) {
     .demo-flex {
@@ -1030,4 +1167,213 @@ header nav {
             grid-template-columns: 1fr;
         }
     }
+}
+
+/* 製作時間セクション */
+/* 製作時間セクション - ミニマルデザイン */
+.time-section {
+    background: #f3f9f1;
+    padding: 2.5rem 2rem;
+    margin: 3rem auto 2rem auto;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    text-align: center;
+}
+
+.time-section h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    letter-spacing: 0.5px;
+}
+
+.time-section p {
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin: 0;
+    color: #2c3e50;
+}
+
+
+/* 参考資料セクション - 統一カラー */
+.reference-content {
+    background:  #f3f9f1 ;
+    padding: 3rem 2rem;
+    margin: 2rem auto 3rem auto;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    max-width: 1000px;
+}
+
+.reference-content h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.reference-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.reference-content li {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.reference-content li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.reference-content li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff69b4, #ffc0cb, #ff6b9d);
+    border-radius: 15px 15px 0 0;
+}
+
+.reference-content h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    padding-left: 1rem;
+    border-left: 4px solid #ff69b4;
+    position: relative;
+}
+
+.reference-content h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #ff69b4, #ffc0cb);
+    border-radius: 1px;
+}
+
+.reference-content p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+}
+
+.reference-content .reference-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 105, 180, 0.1);
+    border-radius: 25px;
+    border: 2px solid rgba(255, 105, 180, 0.2);
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+    word-break: break-all;
+}
+
+.reference-content .reference-link:hover {
+    background: rgba(255, 105, 180, 0.2);
+    border-color: rgba(255, 105, 180, 0.4);
+    transform: translateX(5px);
+    color: #ff1493;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+/* glow アニメーション修正 */
+@keyframes glow {
+    0% { 
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        transform: scale(1);
+    }
+    100% { 
+        text-shadow: 3px 3px 15px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.4);
+        transform: scale(1.02);
+    }
+}
+
+/* 特別効果 - 統一カラー */
+.time-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px rgba(255, 107, 157, 0.4);
+}
+
+
+/* ダークモード対応 - 統一カラー */
+@media (prefers-color-scheme: dark) {
+    .time-section {
+        background: linear-gradient(135deg, #c44569 0%, #ff6b9d 100%);
+    }
+    
+    .reference-content {
+        background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    }
+    
+    .reference-content li {
+        background: rgba(44, 62, 80, 0.95);
+        color: #ecf0f1;
+    }
+    
+    .reference-content h3 {
+        color: #ecf0f1;
+        border-left-color: #ff69b4;
+    }
+    
+    .reference-content p {
+        color: #bdc3c7;
+    }
+    
+    .reference-content .reference-link {
+        color: #ff69b4;
+        background: rgba(255, 105, 180, 0.1);
+        border-color: rgba(255, 105, 180, 0.2);
+    }
+    
+    .reference-content .reference-link:hover {
+        background: rgba(255, 105, 180, 0.2);
+        border-color: rgba(255, 105, 180, 0.4);
+        color: #ff1493;
+    }
+}   
+
+/* 各セクションが確実に中央に配置されるようにする */
+.contents,
+.Introduction,
+.canvas-container,
+.time-section,
+.reference-content,
+.title {
+    margin-left: auto;
+    margin-right: auto;
 }
