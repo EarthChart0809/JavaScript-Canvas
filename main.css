@@ -778,17 +778,6 @@ header nav {
     position: relative;
 }
 
-.Introduction h2::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, #ff69b4, #ffc0cb);
-    border-radius: 1px;
-}
-
 /* 特別な見出し装飾 */
 .Introduction h2:first-of-type {
     border-left-color: #4ecdc4;
@@ -884,17 +873,6 @@ header nav {
     .Introduction details[open] {
         background: rgba(52, 73, 94, 0.9);
     }
-}
-
-/* ホバー効果の追加 */
-.Introduction h2:hover {
-    transform: translateX(5px);
-    transition: transform 0.3s ease;
-}
-
-.Introduction p:hover {
-    color: #2c3e50;
-    transition: color 0.3s ease;
 }
 
 /* スクロール効果 */
@@ -998,11 +976,6 @@ header nav {
     overflow: hidden;
     flex: 1;
     min-width: 350px;
-}
-
-.demo-section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 /* Canvas要素のスタイル */
@@ -1170,7 +1143,6 @@ header nav {
 }
 
 /* 製作時間セクション */
-/* 製作時間セクション - ミニマルデザイン */
 .time-section {
     background: #f3f9f1;
     padding: 2.5rem 2rem;
@@ -1197,8 +1169,7 @@ header nav {
     color: #2c3e50;
 }
 
-
-/* 参考資料セクション - 統一カラー */
+/* 参考資料セクション  */
 .reference-content {
     background:  #f3f9f1 ;
     padding: 3rem 2rem;
@@ -1239,11 +1210,6 @@ header nav {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-}
-
-.reference-content li:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .reference-content li::before {
@@ -1322,13 +1288,6 @@ header nav {
         transform: scale(1.02);
     }
 }
-
-/* 特別効果 - 統一カラー */
-.time-section:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 50px rgba(255, 107, 157, 0.4);
-}
-
 
 /* ダークモード対応 - 統一カラー */
 @media (prefers-color-scheme: dark) {
