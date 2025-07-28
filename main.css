@@ -29,7 +29,7 @@ body {
 }
 
 .upheader {
-  background-image: url("./image/梅の花.jpg");
+  background-image: url("./image/plum_blossoms.jpg");
   background-position: center;
   background-size: cover; /* 画像を全体にフィット */
   height: 500px; /* 高さを指定 */
