@@ -10,6 +10,7 @@
     <link rel="icon" href="./image/kame .png">
     <link rel="apple-touch-icon" href="./image/icon-ume_suibokuga.png">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="responsive.css">
     <script type="text/javascript" src="button.js"></script>
     
     <!-- FontAwesome CDN -->
@@ -413,7 +414,7 @@ function createPistil(sizeScale = 2.0) {
             桜の枝<br>
             マウスでドラッグして回転できます
         </div>
-    <canvas id="treeCanvas" width="480" height="360"></canvas>
+    <canvas id="treeCanvas"></canvas>
     </div>
      <div class="demo-explain">
             <p>このセクションでは、桜の枝を作成します。<br>
@@ -616,5 +617,15 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
             </a></li>
             </ul>
             </div>
+
+            <!-- トップへ戻るボタン -->
+    <div class="back-to-top-container">
+        <a href="#" id="back-to-top">↑ Top</a>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+        <p>© 2025 Kamei Ryo | All Rights Reserved.</p>
+    </footer>
 </body>
 </html>

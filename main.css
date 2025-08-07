@@ -120,6 +120,40 @@ header nav {
     color: #fff; /* ホバー時の文字色を白に変更 */
   }
 
+  /* フッターのスタイル */
+footer {
+  text-align: center;
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  margin-top: 20px;
+  width : 100%;
+}
+
+/* トップへ戻るボタンのコンテナ */
+.back-to-top-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* フッターとの間隔を調整 */
+}
+
+/* トップへ戻るボタンのスタイル */
+#back-to-top {
+  background-color: #163717; /* ボタンの背景色 */
+  color: white; /* 文字色 */
+  padding: 10px 15px; /* ボタンの余白 */
+  border-radius: 50px; /* 丸みを追加 */
+  text-decoration: none; /* 下線を削除 */
+  font-size: 14px; /* フォントサイズ */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 影を追加 */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* アニメーション */
+}
+
+#back-to-top:hover {
+  background-color: #28612b; /* ホバー時の背景色変更 */
+  transform: translateY(-6px); /* 少し浮き上がる */
+}
+
   .demo-flex {
     display: flex;
     flex-direction: row;
@@ -155,307 +189,6 @@ header nav {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
     z-index: 0;
     animation: rotate 25s linear infinite;
-}
-
-/* メディアクエリ: 768px以下の画面サイズ（タブレット） */
-@media (max-width: 768px) {
-  #hero-header {
-    font-size: 2em;
-  }
-
-  .upheader {
-    height: 300px;
-    font-size: 40px;
-  }
-
-  .image-container {
-    width: 45%; /* 画像の幅を調整 */
-  }
-
-  .hover-apng, .hover-apng2 {
-    width: 100px; /* 表示サイズを調整 */
-  }
-
-  .works-flex {
-    flex-direction: column; /* 縦並びに変更 */
-    align-items: center; /* 中央揃え */
-  }
-
-  .works-programming, .works-text, .works-portfolio, .works-loadrunner, .works-dot {
-    width: 100%; /* 幅を100%に設定 */
-    margin-bottom: 30px; /* 下に余白を追加 */
-  }
-
-  .contents {
-        padding: 30px 20px;
-        margin: 10px;
-    }
-
-    .contents h1 {
-        font-size: 2em;
-    }
-
-    .contents h1::before,
-    .contents h1::after {
-        display: none;
-    }
-
-    .contents li {
-        padding: 15px 20px 15px 50px;
-        font-size: 1em;
-    }
-
-     .contents li::before {
-        width: 25px;
-        height: 25px;
-        left: 15px;
-        font-size: 0.8em;
-    }
-
-    .contents li::after {
-        right: 15px;
-        font-size: 1.1em;
-    }
-
-    .Introduction {
-        padding: 1.5rem;
-        margin: 1rem 0;
-    }
-    
-    .Introduction h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    .Introduction p {
-        font-size: 0.9rem;
-    }
-    
-    .Introduction summary {
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-    }
-    
-    .Introduction code {
-        padding: 1rem;
-        font-size: 0.8rem;
-    }
-    
-    .Introduction button {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-        margin: 0.5rem 0 0 0.5rem;
-    }
-
-    .canvas-container {
-        padding: 1.5rem 1rem;
-        margin: 1rem auto;
-        border-radius: 15px;
-    }
-
-    canvas {
-        width: 360px;
-        height: 270px;
-    }
-    
-    .demo-section {
-        padding: 1rem;
-    }
-    
-    .demo-explain {
-        padding: 1.5rem;
-    }
-    
-    .demo-section canvas {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    .canvas-container h1 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .info {
-        font-size: 1rem;
-    }
-    
-    .demo-explain code {
-        font-size: 0.8rem;
-        padding: 1rem;
-    }
-
-    .time-section, .reference-content {
-        padding: 2rem 1rem;
-        margin: 2rem auto;
-        border-radius: 15px;
-    }
-    
-    .time-section h1, .reference-content h1 {
-        font-size: 2rem;
-    }
-    
-    .time-section p {
-        font-size: 2.5rem;
-    }
-    
-    .time-section::after, .reference-content::after {
-        top: 1rem;
-        right: 1rem;
-        font-size: 2rem;
-    }
-    
-    .reference-content li {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .reference-content h3 {
-        font-size: 1.2rem;
-    }
-    
-    .reference-content p {
-        font-size: 0.9rem;
-    }
-    
-    .reference-content .reference-link {
-        padding: 0.7rem 1.2rem;
-        font-size: 0.8rem;
-        margin-left: 0;
-        margin-top: 0.5rem;
-        display: block;
-        text-align: center;
-    }
-
-}
-
-/* メディアクエリ: 480px以下の画面サイズ（スマホ） */
-@media (max-width: 480px) {
-  #hero-header {
-    font-size: 1.5em;
-  }
-
-  .upheader {
-    height: 200px;
-    font-size: 30px;
-  }
-
-  .image-container {
-    width: 100%; /* 画像の幅を調整 */
-  }
-
-  .hover-apng, .hover-apng2 {
-    width: 80px; /* 表示サイズを調整 */
-  }
-
-  .works img {
-    max-width: 100%; /* 画像の最大幅を100%に設定 */
-    height: auto; /* 高さを自動調整 */
-  }
-
-  .works-flex {
-    flex-direction: column; /* 縦並びに変更 */
-    align-items: center; /* 中央揃え */
-  }
-
-  .works-programming, .works-text, .works-portfolio, .works-loadrunner, .works-dot {
-    width: 100%; /* 幅を100%に設定 */
-    margin-bottom: 20px; /* 下に余白を追加 */
-  }
-
-  .contents {
-        padding: 20px 15px;
-    }
-
-    .contents h1 {
-        font-size: 1.8em;
-        margin-bottom: 25px;
-    }
-
-    .contents li {
-        padding: 12px 15px 12px 45px;
-        margin: 15px 0;
-    }
-
-    .contents li::before {
-        width: 22px;
-        height: 22px;
-        left: 12px;
-    }
-
-     .canvas-container {
-        padding: 1rem 0.5rem;
-        margin: 0.5rem auto;
-    }
-    
-    .canvas-container::after {
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-    }
-
-    canvas {
-        width: 280px;
-        height: 210px;
-    }
-    
-    .demo-section, .demo-explain {
-        padding: 1rem;
-    }
-    
-    .canvas-container h1 {
-        font-size: 1.5rem;
-    }
-    
-    .demo-explain summary {
-        padding: 0.8rem 1rem;
-        font-size: 0.9rem;
-    }
-    
-    .demo-explain button {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-        margin: 0.5rem 0 0 0.5rem;
-    }
-
-    .time-section, .reference-content {
-        padding: 1.5rem 0.8rem;
-        margin: 1.5rem auto;
-    }
-    
-    .time-section h1, .reference-content h1 {
-        font-size: 1.8rem;
-        margin-bottom: 1.2rem;
-    }
-    
-    .time-section p {
-        font-size: 2rem;
-    }
-    
-    .reference-content li {
-        padding: 1.2rem;
-    }
-    
-    .reference-content li::after {
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-    }
-    
-    .reference-content h3 {
-        font-size: 1.1rem;
-        padding-left: 0.8rem;
-    }
-    
-    .reference-content p {
-        font-size: 0.85rem;
-        padding-left: 0.8rem;
-    }
-    
-    .reference-content .reference-link {
-        padding: 0.6rem 1rem;
-        font-size: 0.75rem;
-    }
 }
 
 .contents-flex {
@@ -860,30 +593,6 @@ header nav {
     animation: fadeInUp 0.8s ease-out;
 }
 
-/* ダークモード対応 */
-@media (prefers-color-scheme: dark) {
-    .Introduction {
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-        color: #ecf0f1;
-    }
-    
-    .Introduction h2 {
-        color: #ecf0f1;
-    }
-    
-    .Introduction p {
-        color: #bdc3c7;
-    }
-    
-    .Introduction details {
-        background: rgba(52, 73, 94, 0.7);
-    }
-    
-    .Introduction details[open] {
-        background: rgba(52, 73, 94, 0.9);
-    }
-}
-
 /* スクロール効果 */
 .Introduction {
     opacity: 0;
@@ -1080,54 +789,6 @@ header nav {
     animation: fadeInUp 0.8s ease-out;
 }
 
-/* レスポンシブ対応 */
-@media (max-width: 1024px) {
-    .canvas-container {
-        padding: 2rem 1.5rem;
-        margin: 1.5rem auto;
-    }
-    
-    .demo-flex {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .demo-section, .demo-explain {
-        min-width: unset;
-        width: 100%;
-    }
-    
-    .canvas-container h1 {
-        font-size: 2rem;
-    }
-}
-
-/* ダークモード対応 */
-@media (prefers-color-scheme: dark) {
-    .canvas-container {
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    }
-    
-    .demo-section {
-        background: rgba(52, 73, 94, 0.9);
-        color: #ecf0f1;
-    }
-    
-    .demo-explain {
-        background: rgba(52, 73, 94, 0.95);
-        color: #ecf0f1;
-        border-left-color: #e74c3c;
-    }
-    
-    .demo-explain p {
-        color: #bdc3c7;
-    }
-    
-    .demo-section canvas {
-        background: linear-gradient(45deg, #34495e, #2c3e50);
-    }
-}
-
 /* スクロール効果 */
 .canvas-container {
     opacity: 0;
@@ -1153,29 +814,72 @@ header nav {
 
 /* 製作時間セクション */
 .time-section {
-    background: #f3f9f1;
-    padding: 2.5rem 2rem;
-    margin: 3rem auto 2rem auto;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    max-width: 800px;
-    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.time-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    animation: float 6s ease-in-out infinite;
 }
 
 .time-section h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
     color: #2c3e50;
-    letter-spacing: 0.5px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    padding-left: 1rem;
+    border-left: 4px solid #ff69b4;
+    position: relative;
+    text-align: left; /* 中央揃えを左揃えに変更 */
+    text-shadow: none;
 }
 
 .time-section p {
-    font-size: 2.2rem;
+    line-height: 1.8;
+    color: #34495e;
+    font-size: 2.0rem; 
     font-weight: 500;
-    margin: 0;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+    text-align: center; /* 時間表示は中央揃えを維持 */
+    position: relative;
+}
+
+.time-section p::first-line {
+    font-weight: 600;
     color: #2c3e50;
+}
+
+.time-section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* スクロール効果（Introductionと同じ） */
+.time-section {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* 中央配置の統一 */
+.time-section {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px; /* 幅制限を追加 */
 }
 
 /* 参考資料セクション  */
@@ -1197,6 +901,7 @@ header nav {
     margin-bottom: 2.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     position: relative;
+    text-shadow: none;
     z-index: 1;
 }
 
@@ -1297,43 +1002,6 @@ header nav {
         transform: scale(1.02);
     }
 }
-
-/* ダークモード対応 - 統一カラー */
-@media (prefers-color-scheme: dark) {
-    .time-section {
-        background: linear-gradient(135deg, #c44569 0%, #ff6b9d 100%);
-    }
-    
-    .reference-content {
-        background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
-    }
-    
-    .reference-content li {
-        background: rgba(44, 62, 80, 0.95);
-        color: #ecf0f1;
-    }
-    
-    .reference-content h3 {
-        color: #ecf0f1;
-        border-left-color: #ff69b4;
-    }
-    
-    .reference-content p {
-        color: #bdc3c7;
-    }
-    
-    .reference-content .reference-link {
-        color: #ff69b4;
-        background: rgba(255, 105, 180, 0.1);
-        border-color: rgba(255, 105, 180, 0.2);
-    }
-    
-    .reference-content .reference-link:hover {
-        background: rgba(255, 105, 180, 0.2);
-        border-color: rgba(255, 105, 180, 0.4);
-        color: #ff1493;
-    }
-}   
 
 /* 各セクションが確実に中央に配置されるようにする */
 .contents,
