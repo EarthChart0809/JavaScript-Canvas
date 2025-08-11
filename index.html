@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="JavaScriptの基本説明とCanvas APIを使用したアニメーションの作成方法、自然の種の落下メカニズムを再現する方法について学ぶページです。">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="keywords" content="html,css,js,web">
     <meta name="format-detection" content="telephone=no,email=no,address=no">
+
+    <!-- キャッシュ制御の追加 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- モバイル最適化 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <title>JavaScriptとCanvasの基本</title>
     <link rel="icon" href="./image/kame .png">
     <link rel="apple-touch-icon" href="./image/icon-ume_suibokuga.png">
@@ -94,8 +105,10 @@
             また、3Dモデルの花を作成する方法についても触れます。</p>
 
         <h2>JavaScriptの基本説明</h2>
-        <p>JavaScriptは、Webブラウザ上で動作するプログラミング言語であり、主にユーザーインターフェースの操作やデータの<br>
-            処理に使用されます。JavaScriptの基本的な文法や構文について学ぶことは、Web開発において重要です。</p>
+        <p>JavaScriptとは、Webブラウザ上で動作するスクリプト言語の一つで、動的なWebページを作成するために使用されるプログラミング言語のことです。<br>
+            Webブラウザの機能を制御し、動的な操作やアニメーション、ユーザーとのインタラクション、データの検証や処理などを実現できます。<br>
+            JavaScriptは、HTMLやCSSと組み合わせて使用されることが多く、Webページに高度な対話性や視覚効果を追加することができます。<br>
+        </p>
         
         <h2>Three.jsの導入について</h2>
         <p>Three.jsは、WebGLを使用して3Dグラフィックスを描画するためのJavaScriptライブラリです。<br>
@@ -204,7 +217,7 @@ scene.add(sunLight);
         <div class="demo-flex">
         <div class="demo-section">
             <div class="info">
-                🌸 桜の花びら<br>
+                桜の花びら<br>
                 マウスでドラッグして回転できます
             </div>
             <canvas id="petalCanvas" width="480" height="360"></canvas>
@@ -213,7 +226,7 @@ scene.add(sunLight);
         <div class="demo-explain">
             <p>このセクションでは、桜の花びらを描画するためのJavaScriptコードを示します。<br>
             花びらはCanvas APIを使用して描画され、マウスでドラッグして回転させることができます。<br>
-        「quadraticCurveTo()を使って桜の花びら特有の曲線を描画」しました。</p>
+        「quadraticCurveTo()」を使って桜の花びら特有の曲線を描画しました。</p>
 <details>
         <summary>花びら生成関数</summary>
         <p>
@@ -298,7 +311,7 @@ const petal = new THREE.Mesh(geometry, material);
     <div class="demo-flex">
         <div class="demo-section">
             <div class="info">
-                🌸 桜の花<br>
+                桜の花<br>
                 マウスでドラッグして回転できます
             </div>
             <canvas id="sakuraCanvas" width="480" height="360"></canvas>
@@ -578,10 +591,9 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
     </div>
     </div>
         
-        
+    <!-- JSファイルをモジュールとして読み込み -->    
     <script type="module" src="flower-setting/petal.js"></script>
 
-    <!-- JSファイルをモジュールとして読み込み -->
     <script type="module" src="flower-setting/cherry-blossoms.js"></script>
 
     <script type="module" src="flower-setting/tree_trunk.js"></script>
@@ -593,7 +605,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
     
     <div class="time-section">
     <h1>本コンテンツの作成時間</h1>
-    <p>約16時間</p>
+    <p>約18時間</p>
     </div>
 
     <div class="reference-content">

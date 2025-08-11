@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-// ★修正：実際にexportされている関数名に合わせる
 import { createRealisticPlumBranch, createSubBranch, getBranchNodes, createTertiaryBranch, createTinyTwig } from './cherry-parts/brunch_export.js';
 import { createSakuraFlower } from './cherry-parts/petals_export.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 最初に初期化
     setTimeout(() => {
         initPetal();
-    }, 50); // 50ms遅延
+    }, 100); // 100ms遅延
 });
 
 function initPetal() {

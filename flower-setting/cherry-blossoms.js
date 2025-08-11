@@ -1,12 +1,11 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { createRealisticSakuraPetal } from './cherry-parts/petals_export.js'; // ★修正：花びら1枚の関数
+import { createRealisticSakuraPetal } from './cherry-parts/petals_export.js';
 
-// ★修正：DOMContentLoadedイベントを使用
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         initSakura();
-    }, 100);
+    }, 200);
 });
 
 function initSakura() {
